@@ -1,8 +1,9 @@
 ﻿using ReactiveUI;
+using Splat;
 
 namespace PointOfSale.WinFormUI.ViewModels
 {
-    public abstract class BaseViewModel : ReactiveObject
+    public abstract class BaseViewModel : ReactiveObject, IRoutableViewModel
     {
         #region Properties
 
@@ -13,6 +14,9 @@ namespace PointOfSale.WinFormUI.ViewModels
             get { return _applicationTitle; }
             set { _applicationTitle = value; }
         }
+
+        public IScreen HostScreen => Locator.Current.GetService<IScreen>();
+        public string UrlPathSegment { get; protected set; }
 
 
         #endregion

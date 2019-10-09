@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PointOfSale.Domain.Entities;
 
 namespace PointOfSale.Persistence
 {
@@ -6,6 +7,8 @@ namespace PointOfSale.Persistence
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options) { }
+
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

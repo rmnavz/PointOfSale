@@ -52,7 +52,7 @@ namespace PointOfSale.WinFormUI
             view.ViewModel = viewModel;
 
             // Run application
-            Application.Run((Form)view);
+            System.Windows.Forms.Application.Run((Form)view);
         }
 
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()

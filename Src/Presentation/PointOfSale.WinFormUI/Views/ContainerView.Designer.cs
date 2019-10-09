@@ -39,7 +39,7 @@
             this.routerContent.Margin = new System.Windows.Forms.Padding(0);
             this.routerContent.Name = "routerContent";
             this.routerContent.Router = null;
-            this.routerContent.Size = new System.Drawing.Size(796, 454);
+            this.routerContent.Size = new System.Drawing.Size(804, 461);
             this.routerContent.TabIndex = 0;
             this.routerContent.ViewLocator = null;
             // 
@@ -47,7 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 454);
+            this.ClientSize = new System.Drawing.Size(804, 461);
             this.Controls.Add(this.routerContent);
             this.Name = "ContainerView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

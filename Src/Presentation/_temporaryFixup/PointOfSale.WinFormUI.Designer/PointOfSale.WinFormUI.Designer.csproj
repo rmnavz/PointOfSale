@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{48EAB598-42C6-4DB4-86EA-6C5DF7886735}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>PointOfSale.WinFormUI</RootNamespace>
     <AssemblyName>PointOfSale.WinFormUI.Designer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DynamicData, Version=6.13.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -97,11 +100,23 @@
       <Link>Views\ContainerView.designer.cs</Link>
       <DependentUpon>ContainerView.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\PointOfSale.WinFormUI\Views\LoginView.cs">
+      <Link>Views\LoginView.cs</Link>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="..\..\PointOfSale.WinFormUI\Views\LoginView.designer.cs">
+      <Link>Views\LoginView.designer.cs</Link>
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="..\..\PointOfSale.WinFormUI\Views\ContainerView.resx">
       <Link>Views\ContainerView.resx</Link>
       <DependentUpon>ContainerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\PointOfSale.WinFormUI\Views\LoginView.resx">
+      <Link>Views\LoginView.resx</Link>
+      <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

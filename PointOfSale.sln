@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DA182FE9-97CA-4AFF-A54E-FF5E2CC8E89A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{CDB24DE7-A84A-4011-B2EE-FD00A0CEEC06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F42E3F53-E189-43EF-926A-9FAB0FB7B806}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{00FB2168-80F7-4B3A-A41F-1B2AD185CC19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{5271EAB0-CF07-4D38-9D39-33DDA3989C2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4ABA6B22-AB37-4837-B346-DCE7953C1418}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_temporaryFixup", "_temporaryFixup", "{38D3A6D1-E5A7-47F9-B87F-BEF5D7EE0916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.WinFormUI", "Src\Presentation\PointOfSale.WinFormUI\PointOfSale.WinFormUI.csproj", "{C1675077-3C2D-499D-8760-DD3755BA357E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.WinFormUI.Designer", "Src\Presentation\_temporaryFixup\PointOfSale.WinFormUI.Designer\PointOfSale.WinFormUI.Designer.csproj", "{48EAB598-42C6-4DB4-86EA-6C5DF7886735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.Domain", "Src\Application\PointOfSale.Domain\PointOfSale.Domain.csproj", "{11EEE156-42AA-41A6-B0B5-24D93917B149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.Persistence", "Src\Infrastructure\PointOfSale.Persistence\PointOfSale.Persistence.csproj", "{80C1A14F-BABF-446F-A5B0-5DAAF2561252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.Infrastructure", "Src\Infrastructure\PointOfSale.Infrastructure\PointOfSale.Infrastructure.csproj", "{4C736319-C47B-4F2A-A840-EC896F550149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfSale.Application", "Src\Application\PointOfSale.Application\PointOfSale.Application.csproj", "{1B1338A1-314E-4422-A132-D023F5D9A8FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1675077-3C2D-499D-8760-DD3755BA357E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1675077-3C2D-499D-8760-DD3755BA357E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1675077-3C2D-499D-8760-DD3755BA357E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1675077-3C2D-499D-8760-DD3755BA357E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48EAB598-42C6-4DB4-86EA-6C5DF7886735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48EAB598-42C6-4DB4-86EA-6C5DF7886735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48EAB598-42C6-4DB4-86EA-6C5DF7886735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48EAB598-42C6-4DB4-86EA-6C5DF7886735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11EEE156-42AA-41A6-B0B5-24D93917B149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11EEE156-42AA-41A6-B0B5-24D93917B149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11EEE156-42AA-41A6-B0B5-24D93917B149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11EEE156-42AA-41A6-B0B5-24D93917B149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C1A14F-BABF-446F-A5B0-5DAAF2561252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C1A14F-BABF-446F-A5B0-5DAAF2561252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C1A14F-BABF-446F-A5B0-5DAAF2561252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C1A14F-BABF-446F-A5B0-5DAAF2561252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C736319-C47B-4F2A-A840-EC896F550149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C736319-C47B-4F2A-A840-EC896F550149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C736319-C47B-4F2A-A840-EC896F550149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C736319-C47B-4F2A-A840-EC896F550149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1338A1-314E-4422-A132-D023F5D9A8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1338A1-314E-4422-A132-D023F5D9A8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1338A1-314E-4422-A132-D023F5D9A8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1338A1-314E-4422-A132-D023F5D9A8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F42E3F53-E189-43EF-926A-9FAB0FB7B806} = {CDB24DE7-A84A-4011-B2EE-FD00A0CEEC06}
+		{00FB2168-80F7-4B3A-A41F-1B2AD185CC19} = {CDB24DE7-A84A-4011-B2EE-FD00A0CEEC06}
+		{5271EAB0-CF07-4D38-9D39-33DDA3989C2B} = {CDB24DE7-A84A-4011-B2EE-FD00A0CEEC06}
+		{38D3A6D1-E5A7-47F9-B87F-BEF5D7EE0916} = {5271EAB0-CF07-4D38-9D39-33DDA3989C2B}
+		{C1675077-3C2D-499D-8760-DD3755BA357E} = {5271EAB0-CF07-4D38-9D39-33DDA3989C2B}
+		{48EAB598-42C6-4DB4-86EA-6C5DF7886735} = {38D3A6D1-E5A7-47F9-B87F-BEF5D7EE0916}
+		{11EEE156-42AA-41A6-B0B5-24D93917B149} = {F42E3F53-E189-43EF-926A-9FAB0FB7B806}
+		{80C1A14F-BABF-446F-A5B0-5DAAF2561252} = {00FB2168-80F7-4B3A-A41F-1B2AD185CC19}
+		{4C736319-C47B-4F2A-A840-EC896F550149} = {00FB2168-80F7-4B3A-A41F-1B2AD185CC19}
+		{1B1338A1-314E-4422-A132-D023F5D9A8FF} = {F42E3F53-E189-43EF-926A-9FAB0FB7B806}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41E7CEFB-F481-4E32-9A86-9C9A33082303}
+	EndGlobalSection
+EndGlobal

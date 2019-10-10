@@ -42,6 +42,9 @@
     <Reference Include="Pharmacist.Common, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Pharmacist.Common.1.2.2\lib\netstandard2.0\Pharmacist.Common.dll</HintPath>
     </Reference>
+    <Reference Include="PointOfSale.WinFormUI.ControlLibrary">
+      <HintPath>..\..\..\Libraries\PointOfSale.WinFormUI.ControlLibrary\obj\Debug\PointOfSale.WinFormUI.ControlLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ReactiveUI, Version=10.4.0.0, Culture=neutral, processorArchitecture=MSIL">

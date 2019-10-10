@@ -1,38 +1,25 @@
 ﻿using PointOfSale.Application.Accounts.Commands.Login;
-using PointOfSale.Persistence;
 using ReactiveUI;
-using Splat;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Reactive;
 using System.Threading.Tasks;
 
 namespace PointOfSale.WinFormUI.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseIRoutableViewModel, ILoginCommand
     {
-        private string _username;
+        [Reactive]
+        public string Username { get; set; }
+        
+        [Reactive]
+        public string Password { get; set; }
 
-        public string Username
-        {
-            get { return _username; }
-            set { this.RaiseAndSetIfChanged(ref _username, value); }
-        }
+        [Reactive]
+        public string UsernameErrorMessage { get; set; }
 
-        private string _password;
-
-        public string Password
-        {
-            get { return _password; }
-            set { this.RaiseAndSetIfChanged(ref _password, value); }
-        }
-
-        private bool _isBusy;
-
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set { this.RaiseAndSetIfChanged(ref _isBusy, value); }
-        }
+        [Reactive]
+        public string PasswordErrorMessage { get; set; }
 
         public IObservable<bool> CanSubmit => this.WhenAnyValue(
                 vm => vm.Username,
@@ -50,9 +37,9 @@ namespace PointOfSale.WinFormUI.ViewModels
 
         public LoginViewModel()
         {
-            ApplicationTitle = $"{ApplicationTitle} - Login";
+            ViewTitle = "Login";
 
-            loginCommand = new LoginCommand(Locator.Current.GetService<DatabaseContext>());
+            loginCommand = new LoginCommand();
 
             SubmitCommand = ReactiveCommand.CreateFromTask(DoLoginAsync, CanSubmit);
             SubmitCommand.Subscribe(CheckLogin);
@@ -64,10 +51,15 @@ namespace PointOfSale.WinFormUI.ViewModels
             ).Subscribe(x => {
                 loginCommand.Username = x.Item1;
                 loginCommand.Password = x.Item2;
+                UsernameErrorMessage = loginCommand[nameof(Username)];
+                PasswordErrorMessage = loginCommand[nameof(Password)];
             });
         }
 
-        private async Task<bool> DoLoginAsync() => await loginCommand.ExecuteAsync();
+        private async Task<bool> DoLoginAsync()
+        {
+            return await loginCommand.ExecuteAsync();
+        }
 
         private void CheckLogin(bool result)
         {
@@ -80,6 +72,5 @@ namespace PointOfSale.WinFormUI.ViewModels
                 IsBusy = false;
             }
         }
-
     }
 }

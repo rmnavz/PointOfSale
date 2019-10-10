@@ -30,16 +30,14 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="ReactiveUI" Version="10.4.1" />
     <PackageReference Include="ReactiveUI.Events.Winforms" Version="10.4.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="10.4.1" />
     <PackageReference Include="ReactiveUI.WinForms" Version="10.4.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Core\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\PointOfSale.Application\PointOfSale.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\PointOfSale.Persistence\PointOfSale.Persistence.csproj" />
+    <ProjectReference Include="..\..\Libraries\PointOfSale.WinFormUI.ControlLibrary\PointOfSale.WinFormUI.ControlLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>

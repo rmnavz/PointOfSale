@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using System;
 using PointOfSale.Persistence;
+using PointOfSale.WinFormUI.Core;
 
 namespace PointOfSale.WinFormUI
 {
@@ -32,8 +33,13 @@ namespace PointOfSale.WinFormUI
             var context = new DatabaseContext(optionsbuilder.Options);
             Locator.CurrentMutable.RegisterConstant(context, typeof(DatabaseContext));
 
+            // Register ViewLocator
+            Locator.CurrentMutable.RegisterLazySingleton(() => new ConventionalViewLocator(), typeof(IViewLocator));
+
             // Register views
             Locator.CurrentMutable.Register(() => new ContainerView(), typeof(IViewFor<ContainerViewModel>));
+            Locator.CurrentMutable.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
+
         }
 
         public void Run()

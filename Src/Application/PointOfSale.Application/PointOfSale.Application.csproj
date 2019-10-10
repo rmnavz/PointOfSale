@@ -9,6 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="ReactiveUI.Fody" Version="10.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\PointOfSale.Persistence\PointOfSale.Persistence.csproj" />
   </ItemGroup>
 

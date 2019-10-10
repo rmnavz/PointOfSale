@@ -1,39 +1,65 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PointOfSale.Persistence;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
+using PointOfSale.Application.Infrastructure;
+using PointOfSale.Application.Interfaces;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PointOfSale.Application.Accounts.Commands.Login
 {
-    public class LoginCommand
+    public class LoginCommand : BaseCommand, ILoginCommand, IValidatable<LoginCommandValidator>
     {
-        private DatabaseContext _context { get; set; }
+        [Reactive]
+        public string Username { get; set; }
 
-        private string _username;
+        [Reactive]
+        public string Password { get; set; }
 
-        public string Username
+        [Reactive]
+        public LoginCommandValidator Validator { get; set; }
+
+        public LoginCommand()
         {
-            get { return _username; }
-            set { _username = value; }
+            Validator = new LoginCommandValidator();
         }
 
-        private string _password;
-
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
-
-        public LoginCommand(DatabaseContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<bool> ExecuteAsync() => (await _context.Accounts.SingleOrDefaultAsync(x => 
+        public async Task<bool> ExecuteAsync() => (await context.Accounts.SingleOrDefaultAsync(x => 
                 x.Username == Username &&
                 x.Password == Password
-        )).ID != Guid.Empty;
+        )).ID != default;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                var firstOrDefault = Validator.Validate(this).Errors.FirstOrDefault(error => error.PropertyName == columnName);
+                if (firstOrDefault != null)
+                    return Validator != null ? firstOrDefault.ErrorMessage : "";
+                return "";
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                if (Validator != null)
+                {
+                    var results = Validator.Validate(this);
+                    if (results != null && results.Errors.Any())
+                    {
+                        var errors = string.Join(Environment.NewLine, results.Errors.Select(x => x.ErrorMessage).ToArray());
+                        return errors;
+                    }
+                }
+                return string.Empty;
+            }
+        }
 
     }
+
+    
 }

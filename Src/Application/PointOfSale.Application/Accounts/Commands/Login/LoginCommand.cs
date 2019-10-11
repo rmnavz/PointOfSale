@@ -1,9 +1,8 @@
-﻿using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PointOfSale.Application.Infrastructure;
 using PointOfSale.Application.Interfaces;
+using PointOfSale.Domain.Entities;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,24 +11,45 @@ namespace PointOfSale.Application.Accounts.Commands.Login
 {
     public class LoginCommand : BaseCommand, ILoginCommand, IValidatable<LoginCommandValidator>
     {
-        [Reactive]
-        public string Username { get; set; }
+        private string username;
 
-        [Reactive]
-        public string Password { get; set; }
+        public string Username
+        {
+            get { return username; }
+            set { this.RaiseAndSetIfChanged(ref username, value); }
+        }
 
-        [Reactive]
-        public LoginCommandValidator Validator { get; set; }
+        private string password;
+
+        public string Password
+        {
+            get { return password; }
+            set { this.RaiseAndSetIfChanged(ref password, value); }
+        }
+
+        private LoginCommandValidator validator;
+
+        public LoginCommandValidator Validator
+        {
+            get { return validator; }
+            set { this.RaiseAndSetIfChanged(ref validator, value); }
+        }
+
 
         public LoginCommand()
         {
             Validator = new LoginCommandValidator();
         }
 
-        public async Task<bool> ExecuteAsync() => (await context.Accounts.SingleOrDefaultAsync(x => 
+        public async Task<bool> Execute()
+        {
+            Account result = await context.Accounts.SingleOrDefaultAsync(x =>
                 x.Username == Username &&
                 x.Password == Password
-        )).ID != default;
+            );
+
+            return (result.ID != default);
+        }
 
         public string this[string columnName]
         {
@@ -56,6 +76,19 @@ namespace PointOfSale.Application.Accounts.Commands.Login
                     }
                 }
                 return string.Empty;
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                if(Validator != null)
+                {
+                    var results = Validator.Validate(this);
+                    return results.IsValid;
+                }
+                return false;
             }
         }
 

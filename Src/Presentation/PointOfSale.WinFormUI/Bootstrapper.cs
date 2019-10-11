@@ -19,27 +19,37 @@ namespace PointOfSale.WinFormUI
             ConfigureServices();
         }
 
+        private IMutableDependencyResolver IOC = Locator.CurrentMutable;
+
         private void ConfigureServices()
         {
+
             // Register Configuration
             var appSettings = new GlobalAppSettings();
             Configuration.GetSection("AppSettings").Bind(appSettings);
-            Locator.CurrentMutable.RegisterConstant(appSettings, typeof(GlobalAppSettings));
-            Locator.CurrentMutable.RegisterConstant(Configuration, typeof(IConfiguration));
+            IOC.RegisterConstant(appSettings, typeof(GlobalAppSettings));
+            IOC.RegisterConstant(Configuration, typeof(IConfiguration));
 
             // Register DatabaseContext
-            var optionsbuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
-            var context = new DatabaseContext(optionsbuilder.Options);
-            Locator.CurrentMutable.RegisterConstant(context, typeof(DatabaseContext));
+            IOC.Register(() =>
+            {
+                var optionsbuilder = new DbContextOptionsBuilder<DatabaseContext>();
+                optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
+                return new DatabaseContext(optionsbuilder.Options);
+            }, typeof(DatabaseContext));
 
             // Register ViewLocator
-            Locator.CurrentMutable.RegisterLazySingleton(() => new ConventionalViewLocator(), typeof(IViewLocator));
+            IOC.RegisterLazySingleton(() => new ConventionalViewLocator(), typeof(IViewLocator));
 
-            // Register views
-            Locator.CurrentMutable.Register(() => new ContainerView(), typeof(IViewFor<ContainerViewModel>));
-            Locator.CurrentMutable.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
+            // Register Views
+            RegisterViews();
 
+        }
+
+        private void RegisterViews()
+        {
+            IOC.Register(() => new ContainerView(), typeof(IViewFor<ContainerViewModel>));
+            IOC.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
         }
 
         public void Run()

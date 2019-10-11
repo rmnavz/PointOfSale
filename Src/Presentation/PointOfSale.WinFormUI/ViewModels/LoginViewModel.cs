@@ -1,34 +1,50 @@
 ﻿using PointOfSale.Application.Accounts.Commands.Login;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
+using Splat;
 using System;
 using System.Reactive;
-using System.Threading.Tasks;
 
 namespace PointOfSale.WinFormUI.ViewModels
 {
     public class LoginViewModel : BaseIRoutableViewModel, ILoginCommand
     {
-        [Reactive]
-        public string Username { get; set; }
-        
-        [Reactive]
-        public string Password { get; set; }
 
-        [Reactive]
-        public string UsernameErrorMessage { get; set; }
+        private string username;
 
-        [Reactive]
-        public string PasswordErrorMessage { get; set; }
+        public string Username
+        {
+            get { return username; }
+            set { this.RaiseAndSetIfChanged(ref username, value); }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get { return password; }
+            set { this.RaiseAndSetIfChanged(ref password, value); }
+        }
+
+        private string usernameErrorMessage;
+
+        public string UsernameErrorMessage
+        {
+            get { return usernameErrorMessage; }
+            set { this.RaiseAndSetIfChanged(ref usernameErrorMessage, value); }
+        }
+
+        private string passwordErrorMessage;
+
+        public string PasswordErrorMessage
+        {
+            get { return passwordErrorMessage; }
+            set { this.RaiseAndSetIfChanged(ref passwordErrorMessage, value); }
+        }
 
         public IObservable<bool> CanSubmit => this.WhenAnyValue(
-                vm => vm.Username,
-                vm => vm.Password,
                 vm => vm.IsBusy,
-                (E, P, B) =>
-                    !string.IsNullOrWhiteSpace(E) &&
-                    !string.IsNullOrWhiteSpace(P) &&
-                    !B
+                vm => vm.loginCommand.IsValid,
+                (B, V) => !B && V
             );
 
         public ReactiveCommand<Unit, bool> SubmitCommand { get; }
@@ -41,9 +57,9 @@ namespace PointOfSale.WinFormUI.ViewModels
 
             loginCommand = new LoginCommand();
 
-            SubmitCommand = ReactiveCommand.CreateFromTask(DoLoginAsync, CanSubmit);
+            SubmitCommand = ReactiveCommand.CreateFromTask(loginCommand.Execute, CanSubmit);
             SubmitCommand.Subscribe(CheckLogin);
-            //SubmitCommand.ThrownExceptions.Subscribe(ExceptionHandler);
+            SubmitCommand.ThrownExceptions.Subscribe(ex => this.Log().Error(ex, "Something went Wrong"));
 
             this.WhenAnyValue(
                 vm => vm.Username,
@@ -54,11 +70,7 @@ namespace PointOfSale.WinFormUI.ViewModels
                 UsernameErrorMessage = loginCommand[nameof(Username)];
                 PasswordErrorMessage = loginCommand[nameof(Password)];
             });
-        }
 
-        private async Task<bool> DoLoginAsync()
-        {
-            return await loginCommand.ExecuteAsync();
         }
 
         private void CheckLogin(bool result)
@@ -69,7 +81,7 @@ namespace PointOfSale.WinFormUI.ViewModels
             }
             else
             {
-                IsBusy = false;
+
             }
         }
     }

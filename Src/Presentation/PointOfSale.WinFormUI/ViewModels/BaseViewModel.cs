@@ -1,5 +1,4 @@
 ﻿using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using Splat;
 using System;
 
@@ -9,17 +8,37 @@ namespace PointOfSale.WinFormUI.ViewModels
     {
         #region Properties
 
-        [Reactive]
-        public string ApplicationTitle { get; set; }
+        private string applicationTitle;
 
-        [Reactive]
-        public string ViewTitle { get; set; }
+        public string ApplicationTitle
+        {
+            get { return applicationTitle; }
+            set { this.RaiseAndSetIfChanged(ref applicationTitle, value); }
+        }
 
-        [Reactive]
-        public bool IsBusy { get; set; }
+        private string viewTitle;
 
-        [Reactive]
-        public string Title { get; set; }
+        public string ViewTitle
+        {
+            get { return viewTitle; }
+            set { this.RaiseAndSetIfChanged(ref viewTitle, value); }
+        }
+
+        private bool isBusy = false;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { this.RaiseAndSetIfChanged(ref isBusy, value); }
+        }
+
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { this.RaiseAndSetIfChanged(ref title, value); }
+        }
 
         #endregion
 

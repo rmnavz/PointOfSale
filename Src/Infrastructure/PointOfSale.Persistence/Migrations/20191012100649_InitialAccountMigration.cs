@@ -13,7 +13,8 @@ namespace PointOfSale.Persistence.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Password_Salt = table.Column<byte[]>(nullable: true),
+                    Password_Hash = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,8 +25,7 @@ namespace PointOfSale.Persistence.Migrations
                 name: "IX_Accounts_Username",
                 table: "Accounts",
                 column: "Username",
-                unique: true,
-                filter: "[Username] IS NOT NULL");
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

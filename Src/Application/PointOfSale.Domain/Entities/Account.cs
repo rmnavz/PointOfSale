@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PointOfSale.Domain.ValueObjects;
+using System;
 
 namespace PointOfSale.Domain.Entities
 {
@@ -6,6 +7,6 @@ namespace PointOfSale.Domain.Entities
     {
         public Guid ID { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public Encrypted Password { get; set; }
     }
 }

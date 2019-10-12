@@ -1,4 +1,5 @@
 ﻿using PointOfSale.Domain.Entities;
+using PointOfSale.Domain.ValueObjects;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +32,7 @@ namespace PointOfSale.Persistence
 
             Accounts.Add(1, new Account {
                 Username = "Admin",
-                Password = "Admin"
+                Password = (Encrypted)"!P@ssw0rd"
             });
 
             foreach (var account in Accounts.Values)

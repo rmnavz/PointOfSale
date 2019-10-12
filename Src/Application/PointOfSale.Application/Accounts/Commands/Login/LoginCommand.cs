@@ -45,7 +45,7 @@ namespace PointOfSale.Application.Accounts.Commands.Login
         {
             Account result = await context.Accounts.SingleOrDefaultAsync(x =>
                 x.Username == Username &&
-                x.Password == Password
+                x.Password.Verify(Password)
             );
 
             return (result.ID != default);

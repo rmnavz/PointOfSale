@@ -8,4 +8,8 @@
     <Folder Include="Enums\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PointOfSale.Common\PointOfSale.Common.csproj" />
+  </ItemGroup>
+
 </Project>

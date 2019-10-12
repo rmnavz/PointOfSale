@@ -12,6 +12,8 @@ namespace PointOfSale.Persistence.Configurations
 
             builder.HasKey(x => x.ID);
 
+            builder.OwnsOne(x => x.Password);
+
             builder.HasIndex(x => x.Username).IsUnique();
         }
     }

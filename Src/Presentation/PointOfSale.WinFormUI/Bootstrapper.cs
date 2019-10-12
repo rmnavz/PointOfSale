@@ -9,6 +9,7 @@ using System.IO;
 using System;
 using PointOfSale.Persistence;
 using PointOfSale.WinFormUI.Core;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace PointOfSale.WinFormUI
 {
@@ -34,7 +35,21 @@ namespace PointOfSale.WinFormUI
             IOC.Register(() =>
             {
                 var optionsbuilder = new DbContextOptionsBuilder<DatabaseContext>();
-                optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
+                // MS SQL Server
+                switch (appSettings.DbProvider)
+                {
+                    case "MSSQL":
+                        optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
+                        break;
+                    case "MYSQL":
+                        optionsbuilder.UseMySql(Configuration.GetConnectionString("DatabaseConnection"), mySqlOptions => {
+                            mySqlOptions.ServerVersion(new Version(10, 4, 8), ServerType.MariaDb);
+                        });
+                        break;
+                    default:
+                        optionsbuilder.UseInMemoryDatabase($"PointOfSale_{Guid.NewGuid()}");
+                        break;
+                }
                 return new DatabaseContext(optionsbuilder.Options);
             }, typeof(DatabaseContext));
 

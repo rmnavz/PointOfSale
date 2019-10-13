@@ -88,7 +88,7 @@ namespace PointOfSale.WinFormUI.ViewModels
         {
             if (result)
             {
-                MessageBox.Show("Logged In");
+                NavigateAndReset(new DashboardViewModel());
             }
             else
             {

@@ -71,6 +71,7 @@ namespace PointOfSale.WinFormUI
         {
             IOC.Register(() => new ContainerView(), typeof(IViewFor<ContainerViewModel>));
             IOC.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
+            IOC.Register(() => new DashboardView(), typeof(IViewFor<DashboardViewModel>));
         }
 
         public void Run()

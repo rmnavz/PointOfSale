@@ -40,7 +40,6 @@ namespace PointOfSale.Application.Accounts.Commands.Login
 
         private IAuthenticationService authenticationService = Locator.Current.GetService<IAuthenticationService>();
 
-
         public LoginCommand()
         {
             Validator = new LoginCommandValidator();
@@ -49,6 +48,7 @@ namespace PointOfSale.Application.Accounts.Commands.Login
         public async Task<bool> Execute()
         {
             var account = await context.Accounts.SingleOrDefaultAsync(x => x.Username == Username);
+            SignIn(account);
             return account != default && account.Password.Verify(Password);
         }
 

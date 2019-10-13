@@ -15,7 +15,7 @@ namespace PointOfSale.WinFormUI.ViewModels
             }
             else
             {
-
+                NavigateAndReset(new DashboardViewModel());
             }
         }
     }

@@ -103,6 +103,14 @@
       <Link>Views\ContainerView.designer.cs</Link>
       <DependentUpon>ContainerView.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\PointOfSale.WinFormUI\Views\DashboardView.cs">
+      <Link>Views\DashboardView.cs</Link>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="..\..\PointOfSale.WinFormUI\Views\DashboardView.designer.cs">
+      <Link>Views\DashboardView.designer.cs</Link>
+      <DependentUpon>DashboardView.cs</DependentUpon>
+    </Compile>
     <Compile Include="..\..\PointOfSale.WinFormUI\Views\LoginView.cs">
       <Link>Views\LoginView.cs</Link>
       <SubType>UserControl</SubType>
@@ -116,6 +124,10 @@
     <EmbeddedResource Include="..\..\PointOfSale.WinFormUI\Views\ContainerView.resx">
       <Link>Views\ContainerView.resx</Link>
       <DependentUpon>ContainerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\PointOfSale.WinFormUI\Views\DashboardView.resx">
+      <Link>Views\DashboardView.resx</Link>
+      <DependentUpon>DashboardView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\PointOfSale.WinFormUI\Views\LoginView.resx">
       <Link>Views\LoginView.resx</Link>

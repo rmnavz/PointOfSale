@@ -8,6 +8,7 @@ namespace PointOfSale.WinFormUI
 
         // Application Settings
         public string Secret { get; set; }
+        public string DbProvider { get; set; }
         public decimal DESIGN_TIME_SCREEN_WIDTH { get; set; }
         public decimal DESIGN_TIME_SCREEN_HEIGHT { get; set; }
 

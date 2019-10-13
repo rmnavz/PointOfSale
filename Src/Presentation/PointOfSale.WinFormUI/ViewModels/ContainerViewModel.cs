@@ -1,15 +1,16 @@
-﻿using ReactiveUI;
+﻿using System;
 
 namespace PointOfSale.WinFormUI.ViewModels
 {
-    public class ContainerViewModel : BaseViewModel, IScreen
+    public class ContainerViewModel : BaseIScreenViewModel
     {
-        public RoutingState Router { get; }
 
         public ContainerViewModel()
         {
-            // Create router for IScreen
-            Router = new RoutingState();
+            Router
+                .NavigateAndReset
+                .Execute(new LoginViewModel())
+                .Subscribe();
         }
     }
 }

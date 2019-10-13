@@ -8,6 +8,10 @@ using System.Windows.Forms;
 using System.IO;
 using System;
 using PointOfSale.Persistence;
+using PointOfSale.WinFormUI.Core;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using PointOfSale.Common.Interfaces;
+using PointOfSale.Infrastructure;
 
 namespace PointOfSale.WinFormUI
 {
@@ -18,22 +22,55 @@ namespace PointOfSale.WinFormUI
             ConfigureServices();
         }
 
+        private IMutableDependencyResolver IOC = Locator.CurrentMutable;
+
         private void ConfigureServices()
         {
+
+            // Register Framework Services
+            IOC.Register(() => new MachineDateTime(), typeof(IDateTime));
+            IOC.Register(() => new AuthenticationService(), typeof(IAuthenticationService));
+
             // Register Configuration
             var appSettings = new GlobalAppSettings();
             Configuration.GetSection("AppSettings").Bind(appSettings);
-            Locator.CurrentMutable.RegisterConstant(appSettings, typeof(GlobalAppSettings));
-            Locator.CurrentMutable.RegisterConstant(Configuration, typeof(IConfiguration));
+            IOC.RegisterConstant(appSettings, typeof(GlobalAppSettings));
+            IOC.RegisterConstant(Configuration, typeof(IConfiguration));
 
             // Register DatabaseContext
-            var optionsbuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
-            var context = new DatabaseContext(optionsbuilder.Options);
-            Locator.CurrentMutable.RegisterConstant(context, typeof(DatabaseContext));
+            IOC.Register(() =>
+            {
+                var optionsbuilder = new DbContextOptionsBuilder<DatabaseContext>();
+                // MS SQL Server
+                switch (appSettings.DbProvider)
+                {
+                    case "MSSQL":
+                        optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
+                        break;
+                    case "MYSQL":
+                        optionsbuilder.UseMySql(Configuration.GetConnectionString("DatabaseConnection"), mySqlOptions => {
+                            mySqlOptions.ServerVersion(new Version(10, 4, 8), ServerType.MariaDb);
+                        });
+                        break;
+                    default:
+                        optionsbuilder.UseInMemoryDatabase($"PointOfSale_{Guid.NewGuid()}");
+                        break;
+                }
+                return new DatabaseContext(optionsbuilder.Options);
+            }, typeof(DatabaseContext));
 
-            // Register views
-            Locator.CurrentMutable.Register(() => new ContainerView(), typeof(IViewFor<ContainerViewModel>));
+            // Register ViewLocator
+            IOC.RegisterLazySingleton(() => new ConventionalViewLocator(), typeof(IViewLocator));
+
+            // Register Views
+            RegisterViews();
+
+        }
+
+        private void RegisterViews()
+        {
+            IOC.Register(() => new ContainerView(), typeof(IViewFor<ContainerViewModel>));
+            IOC.Register(() => new LoginView(), typeof(IViewFor<LoginViewModel>));
         }
 
         public void Run()
@@ -52,7 +89,7 @@ namespace PointOfSale.WinFormUI
             view.ViewModel = viewModel;
 
             // Run application
-            Application.Run((Form)view);
+            System.Windows.Forms.Application.Run((Form)view);
         }
 
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()

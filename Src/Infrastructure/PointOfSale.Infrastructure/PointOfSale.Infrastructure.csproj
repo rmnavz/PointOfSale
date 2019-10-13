@@ -4,4 +4,12 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Splat" Version="9.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\PointOfSale.Common\PointOfSale.Common.csproj" />
+  </ItemGroup>
+
 </Project>

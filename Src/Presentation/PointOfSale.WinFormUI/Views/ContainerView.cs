@@ -29,7 +29,10 @@ namespace PointOfSale.WinFormUI.Views
                 b(this.OneWayBind(ViewModel, vm => vm.Router, v => v.routerContent.Router));
 
                 // Bind Properties
-                b(this.OneWayBind(ViewModel, vm => vm.ApplicationTitle, v => v.Text));
+                b(this.OneWayBind(ViewModel, vm => vm.Title, v => v.Text));
+
+                // Bind LoadingBar
+                b(this.OneWayBind(ViewModel, vm => vm.IsBusy, v => v.loadingBar.Visible));
             });
         }
 

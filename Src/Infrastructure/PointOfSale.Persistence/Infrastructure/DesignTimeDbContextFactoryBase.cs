@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.IO;
 
@@ -9,8 +10,9 @@ namespace PointOfSale.Persistence.Infrastructure
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
         IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
-        private const string ConnectionStringName = "DatabaseConnection";
+        private const string ConnectionStringName = "MySQLDatabaseConnection";
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
+        private string DbProvider = "MSSQL";
 
         public TContext CreateDbContext(string[] args)
         {
@@ -33,6 +35,7 @@ namespace PointOfSale.Persistence.Infrastructure
                 .Build();
 
             var connectionString = configuration.GetConnectionString(ConnectionStringName);
+            DbProvider = configuration.GetSection("AppSettings").GetSection("DbProvider").Value;
 
             return Create(connectionString);
         }
@@ -48,7 +51,20 @@ namespace PointOfSale.Persistence.Infrastructure
 
             var optionsBuilder = new DbContextOptionsBuilder<TContext>();
 
-            optionsBuilder.UseSqlServer(connectionString);
+            switch (DbProvider)
+            {
+                case "MSSQL":
+                    optionsBuilder.UseSqlServer(connectionString);
+                    break;
+                case "MYSQL":
+                    optionsBuilder.UseMySql(connectionString, mySqlOptions => {
+                        mySqlOptions.ServerVersion(new Version(10, 4, 8), ServerType.MariaDb);
+                    });
+                    break;
+                default:
+                    optionsBuilder.UseInMemoryDatabase($"PointOfSale_{Guid.NewGuid()}");
+                    break;
+            }
 
             return CreateNewInstance(optionsBuilder.Options);
         }

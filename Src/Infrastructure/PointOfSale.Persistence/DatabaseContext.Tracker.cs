@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Navz.StudentPortal.Infrastructure;
 using PointOfSale.Domain.Infrastructure;
+using PointOfSale.Infrastructure;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

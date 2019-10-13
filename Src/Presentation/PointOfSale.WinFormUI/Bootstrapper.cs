@@ -10,6 +10,8 @@ using System;
 using PointOfSale.Persistence;
 using PointOfSale.WinFormUI.Core;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using PointOfSale.Common.Interfaces;
+using PointOfSale.Infrastructure;
 
 namespace PointOfSale.WinFormUI
 {
@@ -24,6 +26,10 @@ namespace PointOfSale.WinFormUI
 
         private void ConfigureServices()
         {
+
+            // Register Framework Services
+            IOC.Register(() => new MachineDateTime(), typeof(IDateTime));
+            IOC.Register(() => new AuthenticationService(), typeof(IAuthenticationService));
 
             // Register Configuration
             var appSettings = new GlobalAppSettings();

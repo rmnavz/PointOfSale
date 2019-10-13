@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using System.Linq;
 
 namespace PointOfSale.Application.Interfaces
 {

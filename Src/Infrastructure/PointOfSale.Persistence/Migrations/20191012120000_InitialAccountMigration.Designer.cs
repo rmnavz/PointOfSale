@@ -9,7 +9,7 @@ using PointOfSale.Persistence;
 namespace PointOfSale.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20191012100649_InitialAccountMigration")]
+    [Migration("20191012120000_InitialAccountMigration")]
     partial class InitialAccountMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,12 @@ namespace PointOfSale.Persistence.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Username")
                         .HasColumnType("varchar(255)");

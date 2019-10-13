@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PointOfSale.Application.Infrastructure;
 using PointOfSale.Application.Interfaces;
+using PointOfSale.Common.Interfaces;
 using PointOfSale.Domain.Entities;
 using ReactiveUI;
+using Splat;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PointOfSale.Application.Accounts.Commands.Login
@@ -35,6 +38,8 @@ namespace PointOfSale.Application.Accounts.Commands.Login
             set { this.RaiseAndSetIfChanged(ref validator, value); }
         }
 
+        private IAuthenticationService authenticationService = Locator.Current.GetService<IAuthenticationService>();
+
 
         public LoginCommand()
         {
@@ -43,12 +48,19 @@ namespace PointOfSale.Application.Accounts.Commands.Login
 
         public async Task<bool> Execute()
         {
-            Account result = await context.Accounts.SingleOrDefaultAsync(x =>
-                x.Username == Username &&
-                x.Password.Verify(Password)
-            );
+            var account = await context.Accounts.SingleOrDefaultAsync(x => x.Username == Username);
+            await Task.Delay(5000);
+            return account.Password.Verify(Password);
+        }
 
-            return (result.ID != default);
+        private void SignIn(Account account)
+        {
+            authenticationService.SignIn(new ClaimsPrincipal(
+                new ClaimsIdentity(new Claim[] {
+                    new Claim(ClaimTypes.NameIdentifier, account.ID.ToString()),
+                    new Claim(ClaimTypes.Name, account.Username.ToString())
+                })
+            ));
         }
 
         public string this[string columnName]
@@ -94,5 +106,4 @@ namespace PointOfSale.Application.Accounts.Commands.Login
 
     }
 
-    
 }

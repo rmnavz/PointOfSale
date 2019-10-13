@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\PointOfSale.Domain\PointOfSale.Domain.csproj" />
+    <ProjectReference Include="..\PointOfSale.Infrastructure\PointOfSale.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

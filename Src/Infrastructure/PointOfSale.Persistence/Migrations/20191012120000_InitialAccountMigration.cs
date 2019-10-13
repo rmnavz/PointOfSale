@@ -12,6 +12,8 @@ namespace PointOfSale.Persistence.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
                     Username = table.Column<string>(nullable: true),
                     Password_Salt = table.Column<byte[]>(nullable: true),
                     Password_Hash = table.Column<byte[]>(nullable: true)

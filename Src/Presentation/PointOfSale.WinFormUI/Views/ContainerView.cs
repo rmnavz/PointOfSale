@@ -32,7 +32,7 @@ namespace PointOfSale.WinFormUI.Views
                 b(this.OneWayBind(ViewModel, vm => vm.Title, v => v.Text));
 
                 // Bind LoadingBar
-                b(this.Bind(ViewModel, vm => vm.IsBusy, v => v.loadingBar.Visible));
+                b(this.OneWayBind(ViewModel, vm => vm.IsBusy, v => v.loadingBar.Visible));
             });
         }
 

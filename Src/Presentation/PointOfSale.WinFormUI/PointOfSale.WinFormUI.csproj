@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\PointOfSale.Application\PointOfSale.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\PointOfSale.Infrastructure\PointOfSale.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\PointOfSale.Persistence\PointOfSale.Persistence.csproj" />
     <ProjectReference Include="..\..\Libraries\PointOfSale.WinFormUI.ControlLibrary\PointOfSale.WinFormUI.ControlLibrary.csproj" />
   </ItemGroup>

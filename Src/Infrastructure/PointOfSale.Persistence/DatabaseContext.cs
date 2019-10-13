@@ -3,7 +3,7 @@ using PointOfSale.Domain.Entities;
 
 namespace PointOfSale.Persistence
 {
-    public class DatabaseContext : DbContext
+    public partial class DatabaseContext : DbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options) { }

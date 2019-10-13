@@ -24,7 +24,7 @@ namespace PointOfSale.WinFormUI.ViewModels
             set { this.RaiseAndSetIfChanged(ref viewTitle, value); }
         }
 
-        private bool isBusy = false;
+        private bool isBusy;
 
         public bool IsBusy
         {
@@ -47,12 +47,19 @@ namespace PointOfSale.WinFormUI.ViewModels
             //Set Properties
             ApplicationTitle = "Point Of Sale";
 
+            IsBusy = false;
+
             this.WhenAnyValue(
                 vm => vm.ApplicationTitle,
                 vm => vm.ViewTitle
             ).Subscribe(x => {
                 Title = x.Item1 + (x.Item2 != default ? $" - {x.Item2}" : "");
             });
+        }
+
+        protected void IsExecuting(bool isExecuting)
+        {
+            IsBusy = isExecuting;
         }
     }
 

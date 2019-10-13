@@ -3,6 +3,7 @@ using ReactiveUI;
 using Splat;
 using System;
 using System.Reactive;
+using System.Windows.Forms;
 
 namespace PointOfSale.WinFormUI.ViewModels
 {
@@ -41,9 +42,18 @@ namespace PointOfSale.WinFormUI.ViewModels
             set { this.RaiseAndSetIfChanged(ref passwordErrorMessage, value); }
         }
 
+        private bool isValid;
+
+        public bool IsValid
+        {
+            get { return isValid; }
+            set { this.RaiseAndSetIfChanged(ref isValid, value); }
+        }
+
+
         public IObservable<bool> CanSubmit => this.WhenAnyValue(
                 vm => vm.IsBusy,
-                vm => vm.loginCommand.IsValid,
+                vm => vm.IsValid,
                 (B, V) => !B && V
             );
 
@@ -59,6 +69,7 @@ namespace PointOfSale.WinFormUI.ViewModels
 
             SubmitCommand = ReactiveCommand.CreateFromTask(loginCommand.Execute, CanSubmit);
             SubmitCommand.Subscribe(CheckLogin);
+            SubmitCommand.IsExecuting.Subscribe(IsExecuting);
             SubmitCommand.ThrownExceptions.Subscribe(ex => this.Log().Error(ex, "Something went Wrong"));
 
             this.WhenAnyValue(
@@ -69,19 +80,19 @@ namespace PointOfSale.WinFormUI.ViewModels
                 loginCommand.Password = x.Item2;
                 UsernameErrorMessage = loginCommand[nameof(Username)];
                 PasswordErrorMessage = loginCommand[nameof(Password)];
+                IsValid = loginCommand.IsValid;
             });
-
         }
 
         private void CheckLogin(bool result)
         {
             if (result)
             {
-                
+                MessageBox.Show("Logged In");
             }
             else
             {
-
+                MessageBox.Show("Account is not Recognized");
             }
         }
     }

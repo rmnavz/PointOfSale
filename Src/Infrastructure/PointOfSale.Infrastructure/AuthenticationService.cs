@@ -7,9 +7,12 @@ namespace PointOfSale.Infrastructure
 {
     public class AuthenticationService : IAuthenticationService
     {
-        public ClaimsPrincipal CurrentUser()
+        public ClaimsPrincipal CurrentUser
         {
-            return Locator.Current.GetService<ClaimsPrincipal>();
+            get
+            {
+                return Locator.Current.GetService<ClaimsPrincipal>();
+            }
         }
 
         public Task SignIn(ClaimsPrincipal claimsPrincipal)

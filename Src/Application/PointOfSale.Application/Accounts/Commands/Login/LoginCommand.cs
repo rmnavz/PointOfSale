@@ -49,8 +49,7 @@ namespace PointOfSale.Application.Accounts.Commands.Login
         public async Task<bool> Execute()
         {
             var account = await context.Accounts.SingleOrDefaultAsync(x => x.Username == Username);
-            await Task.Delay(5000);
-            return account.Password.Verify(Password);
+            return account != default && account.Password.Verify(Password);
         }
 
         private void SignIn(Account account)

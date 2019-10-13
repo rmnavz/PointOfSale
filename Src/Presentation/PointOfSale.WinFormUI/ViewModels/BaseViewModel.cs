@@ -66,6 +66,32 @@ namespace PointOfSale.WinFormUI.ViewModels
     public abstract class BaseIRoutableViewModel : BaseViewModel, IRoutableViewModel {
         public IScreen HostScreen => Locator.Current.GetService<IScreen>();
         public string UrlPathSegment { get; protected set; }
+        public void Navigate(BaseIRoutableViewModel View)
+        {
+            HostScreen.Router
+                .Navigate
+                .Execute(View)
+                .Subscribe();
+        }
+
+        public void NavigateAndReset(BaseIRoutableViewModel View)
+        {
+            HostScreen.Router
+                .NavigateAndReset
+                .Execute(View)
+                .Subscribe();
+        }
+
+        public void NavigateBack()
+        {
+            if (HostScreen.Router.NavigationStack.Count > 0)
+            {
+                HostScreen.Router
+                    .NavigateBack
+                    .Execute()
+                    .Subscribe();
+            }
+        }
     }
     public abstract class BaseIScreenViewModel : BaseViewModel, IScreen {
         public RoutingState Router { get; }
@@ -74,6 +100,33 @@ namespace PointOfSale.WinFormUI.ViewModels
         {
             // Create router for IScreen
             Router = new RoutingState();
+        }
+
+        public void Navigate(BaseIRoutableViewModel View)
+        {
+            Router
+                .Navigate
+                .Execute(View)
+                .Subscribe();
+        }
+
+        public void NavigateAndReset(BaseIRoutableViewModel View)
+        {
+            Router
+                .NavigateAndReset
+                .Execute(View)
+                .Subscribe();
+        }
+
+        public void NavigateBack()
+        {
+            if (Router.NavigationStack.Count > 0)
+            {
+                Router
+                    .NavigateBack
+                    .Execute()
+                    .Subscribe();
+            }
         }
     }
 }

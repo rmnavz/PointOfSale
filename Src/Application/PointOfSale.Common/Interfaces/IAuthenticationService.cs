@@ -9,6 +9,6 @@ namespace PointOfSale.Common.Interfaces
 
         Task SignOut();
 
-        ClaimsPrincipal CurrentUser();
+        ClaimsPrincipal CurrentUser { get; }
     }
 }

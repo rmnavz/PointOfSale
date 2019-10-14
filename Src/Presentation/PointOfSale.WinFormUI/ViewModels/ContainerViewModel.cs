@@ -1,11 +1,7 @@
-﻿using PointOfSale.Common.Interfaces;
-using Splat;
-
-namespace PointOfSale.WinFormUI.ViewModels
+﻿namespace PointOfSale.WinFormUI.ViewModels
 {
     public class ContainerViewModel : BaseIScreenViewModel
     {
-        private IAuthenticationService authenticationService = Locator.Current.GetService<IAuthenticationService>();
 
         public ContainerViewModel()
         {

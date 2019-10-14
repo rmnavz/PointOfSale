@@ -36,6 +36,12 @@ namespace PointOfSale.Persistence
                 Password = (Encrypted)"!P@ssw0rd"
             });
 
+            Accounts.Add(2, new Account
+            {
+                Username = "John",
+                Password = (Encrypted)"!P@ssw0rd"
+            });
+
             foreach (var account in Accounts.Values)
             {
                 context.Accounts.Add(account);

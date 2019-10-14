@@ -1,8 +1,7 @@
-﻿using PointOfSale.Common.Interfaces;
-using ReactiveUI;
+﻿using ReactiveUI;
 using Splat;
 using System;
-using System.Reactive.Linq;
+using System.Reactive;
 
 namespace PointOfSale.WinFormUI.ViewModels
 {
@@ -16,29 +15,23 @@ namespace PointOfSale.WinFormUI.ViewModels
             set { this.RaiseAndSetIfChanged(ref greetings, value); }
         }
 
-        private string dateTime;
+        public ReactiveCommand<Unit, Unit> LogoutCommand { get; }
 
-        public string DateTime
-        {
-            get { return dateTime; }
-            set { this.RaiseAndSetIfChanged(ref dateTime, value); }
-        }
-
-
-        private IDateTime machineDateTime = Locator.Current.GetService<IDateTime>();
-        private IAuthenticationService authenticationService = Locator.Current.GetService<IAuthenticationService>();
         public DashboardViewModel()
         {
             ViewTitle = "Dashboard";
 
             Greetings = $"Welcome Back {authenticationService.CurrentUser.Identity.Name}";
 
-            Observable
-                .Interval(TimeSpan.FromSeconds(1))
-                .Subscribe(x =>
-                {
-                    DateTime = machineDateTime.Now.ToString("dddd, dd MMMM yyyy hh:mm tt");
-                });
+            LogoutCommand = ReactiveCommand.CreateFromTask(authenticationService.SignOut);
+            LogoutCommand.Subscribe(logout);
+            LogoutCommand.IsExecuting.Subscribe(IsExecuting);
+            LogoutCommand.ThrownExceptions.Subscribe(ex => this.Log().Error(ex, "Something went Wrong"));
+        }
+
+        private void logout(Unit unit)
+        {
+            NavigateAndReset(new LoginViewModel());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using PointOfSale.Common.Interfaces;
+using ReactiveUI;
 using Splat;
 using System;
 
@@ -42,6 +43,10 @@ namespace PointOfSale.WinFormUI.ViewModels
 
         #endregion
 
+
+
+        protected IAuthenticationService authenticationService = Locator.Current.GetService<IAuthenticationService>();
+
         public BaseViewModel()
         {
             //Set Properties
@@ -68,6 +73,7 @@ namespace PointOfSale.WinFormUI.ViewModels
     {
         public IScreen HostScreen => Locator.Current.GetService<IScreen>();
         public string UrlPathSegment { get; protected set; }
+
         public void Navigate(BaseIRoutableViewModel View)
         {
             HostScreen.Router

@@ -10,7 +10,7 @@ namespace PointOfSale.Persistence.Infrastructure
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
         IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
-        private const string ConnectionStringName = "MySQLDatabaseConnection";
+        private const string ConnectionStringName = "DatabaseConnection";
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
         private string DbProvider = "MSSQL";
 

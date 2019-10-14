@@ -1,5 +1,7 @@
 ﻿using PointOfSale.WinFormUI.ViewModels;
 using ReactiveUI;
+using System;
+using System.Reactive.Linq;
 using System.Windows.Forms;
 
 namespace PointOfSale.WinFormUI.Views
@@ -23,7 +25,9 @@ namespace PointOfSale.WinFormUI.Views
 
                 // Bind Properties
                 d(this.OneWayBind(ViewModel, vm => vm.Greetings, v => v.lblGreetings.Text));
-                d(this.OneWayBind(ViewModel, vm => vm.DateTime, v => v.lblClock.Text));
+
+                // Bind Commands
+                d(this.BindCommand(ViewModel, vm => vm.LogoutCommand, v => v.btnLogout));
             });
         }
     }

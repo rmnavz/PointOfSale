@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using System.Linq;
-
-namespace PointOfSale.Application.Interfaces
+﻿namespace PointOfSale.Application.Interfaces
 {
     public interface IValidatable<T>
     {

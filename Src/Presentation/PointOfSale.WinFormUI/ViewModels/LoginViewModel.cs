@@ -75,7 +75,8 @@ namespace PointOfSale.WinFormUI.ViewModels
             this.WhenAnyValue(
                 vm => vm.Username,
                 vm => vm.Password
-            ).Subscribe(x => {
+            ).Subscribe(x =>
+            {
                 loginCommand.Username = x.Item1;
                 loginCommand.Password = x.Item2;
                 UsernameErrorMessage = loginCommand[nameof(Username)];

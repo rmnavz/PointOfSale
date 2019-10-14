@@ -30,7 +30,8 @@ namespace PointOfSale.Persistence
         public void SeedAccounts(DatabaseContext context)
         {
 
-            Accounts.Add(1, new Account {
+            Accounts.Add(1, new Account
+            {
                 Username = "Admin",
                 Password = (Encrypted)"!P@ssw0rd"
             });

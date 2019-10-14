@@ -52,7 +52,8 @@ namespace PointOfSale.WinFormUI.ViewModels
             this.WhenAnyValue(
                 vm => vm.ApplicationTitle,
                 vm => vm.ViewTitle
-            ).Subscribe(x => {
+            ).Subscribe(x =>
+            {
                 Title = x.Item1 + (x.Item2 != default ? $" - {x.Item2}" : "");
             });
         }
@@ -63,7 +64,8 @@ namespace PointOfSale.WinFormUI.ViewModels
         }
     }
 
-    public abstract class BaseIRoutableViewModel : BaseViewModel, IRoutableViewModel {
+    public abstract class BaseIRoutableViewModel : BaseViewModel, IRoutableViewModel
+    {
         public IScreen HostScreen => Locator.Current.GetService<IScreen>();
         public string UrlPathSegment { get; protected set; }
         public void Navigate(BaseIRoutableViewModel View)
@@ -93,7 +95,8 @@ namespace PointOfSale.WinFormUI.ViewModels
             }
         }
     }
-    public abstract class BaseIScreenViewModel : BaseViewModel, IScreen {
+    public abstract class BaseIScreenViewModel : BaseViewModel, IScreen
+    {
         public RoutingState Router { get; }
 
         public BaseIScreenViewModel()

@@ -1,6 +1,5 @@
 ﻿using PointOfSale.Domain.Infrastructure;
 using PointOfSale.Domain.ValueObjects;
-using System;
 
 namespace PointOfSale.Domain.Entities
 {

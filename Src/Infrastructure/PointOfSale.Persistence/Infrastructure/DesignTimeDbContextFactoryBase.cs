@@ -57,7 +57,8 @@ namespace PointOfSale.Persistence.Infrastructure
                     optionsBuilder.UseSqlServer(connectionString);
                     break;
                 case "MYSQL":
-                    optionsBuilder.UseMySql(connectionString, mySqlOptions => {
+                    optionsBuilder.UseMySql(connectionString, mySqlOptions =>
+                    {
                         mySqlOptions.ServerVersion(new Version(10, 4, 8), ServerType.MariaDb);
                     });
                     break;

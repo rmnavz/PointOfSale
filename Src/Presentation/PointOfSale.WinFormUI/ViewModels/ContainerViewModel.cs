@@ -9,7 +9,7 @@ namespace PointOfSale.WinFormUI.ViewModels
 
         public ContainerViewModel()
         {
-            if(authenticationService.CurrentUser == default)
+            if (authenticationService.CurrentUser == default)
             {
                 NavigateAndReset(new LoginViewModel());
             }

@@ -27,9 +27,9 @@ namespace PointOfSale.Persistence
             var entities = ChangeTracker.Entries()
                 .Where(x => x.Entity is Entity && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
-            foreach( var entity in entities)
+            foreach (var entity in entities)
             {
-                if(entity.State == EntityState.Added)
+                if (entity.State == EntityState.Added)
                 {
                     ((Entity)entity.Entity).DateCreated = new MachineDateTime().Now;
                 }

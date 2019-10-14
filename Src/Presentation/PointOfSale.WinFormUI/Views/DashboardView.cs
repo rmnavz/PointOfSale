@@ -18,10 +18,12 @@ namespace PointOfSale.WinFormUI.Views
         {
             InitializeComponent();
 
-            this.WhenActivated(d => {
+            this.WhenActivated(d =>
+            {
 
                 // Bind Properties
                 d(this.OneWayBind(ViewModel, vm => vm.Greetings, v => v.lblGreetings.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.DateTime, v => v.lblClock.Text));
             });
         }
     }

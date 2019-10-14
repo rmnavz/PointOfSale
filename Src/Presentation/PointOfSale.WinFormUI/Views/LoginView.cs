@@ -18,7 +18,8 @@ namespace PointOfSale.WinFormUI.Views
         {
             InitializeComponent();
 
-            this.WhenActivated(d => {
+            this.WhenActivated(d =>
+            {
 
                 // Bind Properties
                 d(this.Bind(ViewModel, vm => vm.Username, v => v.InputUsername.InputTextBox.Text));

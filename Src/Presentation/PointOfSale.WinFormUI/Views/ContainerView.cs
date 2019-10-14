@@ -23,7 +23,8 @@ namespace PointOfSale.WinFormUI.Views
         {
             InitializeComponent();
 
-            this.WhenActivated(b => {
+            this.WhenActivated(b =>
+            {
 
                 // Bind Router
                 b(this.OneWayBind(ViewModel, vm => vm.Router, v => v.routerContent.Router));

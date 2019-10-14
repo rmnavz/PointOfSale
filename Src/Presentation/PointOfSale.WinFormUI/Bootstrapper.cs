@@ -1,17 +1,17 @@
-﻿using PointOfSale.WinFormUI.ViewModels;
-using PointOfSale.WinFormUI.Views;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Splat;
-using ReactiveUI;
-using System.Windows.Forms;
-using System.IO;
-using System;
-using PointOfSale.Persistence;
-using PointOfSale.WinFormUI.Core;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using PointOfSale.Common.Interfaces;
 using PointOfSale.Infrastructure;
+using PointOfSale.Persistence;
+using PointOfSale.WinFormUI.Core;
+using PointOfSale.WinFormUI.ViewModels;
+using PointOfSale.WinFormUI.Views;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using ReactiveUI;
+using Splat;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace PointOfSale.WinFormUI
 {
@@ -48,7 +48,8 @@ namespace PointOfSale.WinFormUI
                         optionsbuilder.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
                         break;
                     case "MYSQL":
-                        optionsbuilder.UseMySql(Configuration.GetConnectionString("DatabaseConnection"), mySqlOptions => {
+                        optionsbuilder.UseMySql(Configuration.GetConnectionString("DatabaseConnection"), mySqlOptions =>
+                        {
                             mySqlOptions.ServerVersion(new Version(10, 4, 8), ServerType.MariaDb);
                         });
                         break;

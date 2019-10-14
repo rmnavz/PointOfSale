@@ -23,7 +23,7 @@ namespace PointOfSale.WinFormUI
 
             using (var context = Locator.Current.GetService<DatabaseContext>())
             {
-                
+
                 try
                 {
                     context.Database.Migrate();

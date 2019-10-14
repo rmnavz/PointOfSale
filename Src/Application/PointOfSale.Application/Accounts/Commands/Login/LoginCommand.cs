@@ -94,7 +94,7 @@ namespace PointOfSale.Application.Accounts.Commands.Login
         {
             get
             {
-                if(Validator != null)
+                if (Validator != null)
                 {
                     var results = Validator.Validate(this);
                     return results.IsValid;
